@@ -1,8 +1,7 @@
 package main
 
 import (
-	"log"
-
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -17,10 +16,10 @@ func Getconf() (string, string, int, string) {
 	viper.SafeWriteConfig()
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Fatal("read config failed: %v", err)
+		logrus.Fatal("read config failed: %v", err)
 	}
 	if viper.Get("workdir") == "" || viper.Get("outputdir") == "" {
-		log.Fatal("启动失败请完善配置文件")
+		logrus.Fatal("启动失败请完善配置文件")
 	}
 	return viper.GetString("workdir"), viper.GetString("outputdir"), viper.GetInt("ffmpegtype"), viper.GetString("ffmpegcom")
 
