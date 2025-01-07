@@ -2,12 +2,18 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/TensoRaws/ffmpeg_for_BililiveRecorder/webhook"
 )
 
 func main() {
+	workdir, outputdir, ffmpegtype, ffmpegcom := Getconf()
+	fmt.Println("录播姬工作目录" + workdir)
+	fmt.Println("输出文件" + outputdir)
+	fmt.Println("配置类型" + strconv.Itoa(ffmpegtype))
+	fmt.Println("自定义命令" + ffmpegcom)
 	wh := webhook.NewWebhookServer("test")
 	wh.OnFileClose(func(event *webhook.EventFileClose) {
 		fmt.Println("已接收待处理文件" + event.EventData.RelativePath)
