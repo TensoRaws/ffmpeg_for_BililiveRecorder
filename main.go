@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"os/exec"
 	"path"
 	"strconv"
@@ -11,8 +12,16 @@ import (
 )
 
 func main() {
+	//启动参数
+	var ports int
+	var debugon bool
+	flag.IntVar(&ports, "port", 8080, "端口")
+	flag.BoolVar(&debugon, "debug", false, "调试模式")
+	flag.Parse()
 	//设置日志级别
-	logrus.SetLevel(logrus.DebugLevel)
+	if debugon {
+		logrus.SetLevel(logrus.DebugLevel)
+	}
 	//读取配置
 	workdir, outputdir, ffmpegtype, ffmpegcom := Getconf()
 	logrus.Debug("录播姬工作目录" + workdir)
@@ -29,7 +38,7 @@ func main() {
 		logrus.Info("已接提交文件" + event.EventData.RelativePath)
 	})
 
-	webhook.StartServers(":8080")
+	webhook.StartServers(":" + strconv.Itoa(ports))
 }
 
 func ffmpegrun(workpath string, outpath string, types int, comm string) {
