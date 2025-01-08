@@ -2,11 +2,10 @@ package main
 
 import (
 	"flag"
-	"os/exec"
 	"path"
 	"strconv"
-	"strings"
 
+	"github.com/TensoRaws/ffmpeg_for_BililiveRecorder/ffmpegrunner"
 	"github.com/TensoRaws/ffmpeg_for_BililiveRecorder/webhook"
 	"github.com/sirupsen/logrus"
 )
@@ -34,29 +33,9 @@ func main() {
 		logrus.Info("已接收待处理文件" + event.EventData.RelativePath)
 		fullworkpath := workdir + event.EventData.RelativePath
 		fulloutpath := outputdir + path.Base(fullworkpath)
-		go ffmpegrun(fullworkpath, fulloutpath, ffmpegtype, ffmpegcom)
+		go ffmpegrunner.Ffmpegrun(fullworkpath, fulloutpath, ffmpegtype, ffmpegcom)
 		logrus.Info("已接提交文件" + event.EventData.RelativePath)
 	})
 
 	webhook.StartServers(":" + strconv.Itoa(ports))
-}
-
-func ffmpegrun(workpath string, outpath string, types int, comm string) {
-	logrus.Info("开始处理" + workpath)
-	//执行逻辑
-	//自定义配置
-	if types == 0 {
-		//替换文件名
-		outpath = strings.ReplaceAll(outpath, ".flv", ".mp4")
-		comm = strings.ReplaceAll(comm, "{fullworkpath}", workpath)
-		comm = strings.ReplaceAll(comm, "{fullwoutpath}", outpath)
-		//提交执行
-		logrus.Debug("执行命令" + comm)
-		cmd := exec.Command("ffmpeg", strings.Split(comm, " ")...)
-		err := cmd.Run()
-		if err != nil {
-			logrus.Fatalf("cmd.Run() failed with %s\n", err)
-		}
-	}
-	logrus.Info("完成处理" + workpath)
 }
