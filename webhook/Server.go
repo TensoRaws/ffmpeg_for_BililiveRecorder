@@ -2,9 +2,10 @@ package webhook
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 type Server struct {
@@ -171,9 +172,9 @@ func StartServers(addr string) {
 		server.ListenAndServe()
 	}()
 
-	fmt.Println("Webhook server started at", addr)
+	logrus.Info("Webhook server started at", addr)
 	for _, s := range servers {
-		fmt.Printf("Webhook server %s started: %s\n", s.Name, addr+"/"+s.Name)
+		logrus.Info("Webhook server %s started: %s\n", s.Name, addr+"/"+s.Name)
 	}
 
 	select {}
