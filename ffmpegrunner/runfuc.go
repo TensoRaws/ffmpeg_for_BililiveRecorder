@@ -25,7 +25,7 @@ func Ffmpegrun(workpath string, outpath string, types int, comms string) {
 	//提交执行
 	var cmd *exec.Cmd
 	if runtime.GOOS == "linux" {
-		comm += "-n 19 ffmpeg"
+		comm = "-n 19 ffmpeg " + comm
 		cmd = exec.Command("nice", strings.Split(comm, " ")...)
 	} else {
 		cmd = exec.Command("ffmpeg", strings.Split(comm, " ")...)
