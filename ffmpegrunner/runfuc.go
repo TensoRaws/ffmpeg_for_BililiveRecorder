@@ -15,7 +15,7 @@ func Ffmpegrun(workpath string, outpath string, types int, comm string) {
 		//替换文件名
 		outpath = strings.ReplaceAll(outpath, ".flv", ".mp4")
 		comm = strings.ReplaceAll(comm, "{fullworkpath}", workpath)
-		comm = strings.ReplaceAll(comm, "{fullwoutpath}", outpath)
+		comm = strings.ReplaceAll(comm, "{fulloutpath}", outpath)
 		//提交执行
 		logrus.Debug("执行命令" + comm)
 		cmd := exec.Command("ffmpeg", strings.Split(comm, " ")...)
