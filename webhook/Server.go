@@ -174,7 +174,7 @@ func StartServers(addr string) {
 
 	logrus.Info("Webhook server started at", addr)
 	for _, s := range servers {
-		logrus.Info("Webhook server %s started: %s\n", s.Name, addr+"/"+s.Name)
+		logrus.Infof("Webhook server %s started: %s\n", s.Name, addr+"/"+s.Name)
 	}
 
 	select {}
