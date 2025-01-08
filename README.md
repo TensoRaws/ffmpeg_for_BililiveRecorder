@@ -20,10 +20,16 @@
 |  配置序号   | 内容  | 备注 |
 |  ----  | ----  | ----  |
 |0|执行`ffmpegcom`中的参数||
+|10|`-i {fullworkpath} -c:v libsvtav1 -c:a copy -crf 40 -preset 6 {fulloutpath}`|av1压制,建议在ffmpeg7.x版本中使用|
+|11|`-i {fullworkpath} -c:v libx265 -c:a copy -preset slow {fulloutpath}`|h265压制，该方法有概率压制失败|
 
 3. 运行程序
 
 命令行运行`./ffmpeg_for_BililiveRecorder`
+
+4. 添加webhook  
+
+在录播姬中的`设置`->`Webhook V2`填写`http://127.0.0.1:8080/ffmpeg`
 
 
 ## 鸣谢
