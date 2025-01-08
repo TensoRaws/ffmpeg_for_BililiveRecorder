@@ -27,10 +27,11 @@ func Ffmpegrun(workpath string, outpath string, types int, comms string) {
 	if runtime.GOOS == "linux" {
 		comm = "-n 19 ffmpeg " + comm
 		cmd = exec.Command("nice", strings.Split(comm, " ")...)
+		logrus.Debug("执行命令" + "nice " + comm)
 	} else {
 		cmd = exec.Command("ffmpeg", strings.Split(comm, " ")...)
+		logrus.Debug("执行命令" + "ffmpeg " + comm)
 	}
-	logrus.Debug("执行命令" + comm)
 	err := cmd.Run()
 	if err != nil {
 		logrus.Fatalf("cmd.Run() failed with %s\n", err)
