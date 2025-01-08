@@ -1,0 +1,4 @@
+ffmpegcom = ''
+ffmpegtype = 10
+outputdir = ''
+workdir = ''
