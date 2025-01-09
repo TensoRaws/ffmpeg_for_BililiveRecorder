@@ -13,6 +13,7 @@ func Getconf() (string, string, int, string) {
 	viper.SetDefault("outputdir", "")
 	viper.SetDefault("ffmpegtype", 10)
 	viper.SetDefault("ffmpegcom", "")
+	viper.SetDefault("rmtime", -1)
 	viper.SafeWriteConfig()
 	err := viper.ReadInConfig()
 	if err != nil {

@@ -15,6 +15,7 @@
 | outputdir | 输出目录 |
 | ffmpegtype | 配置序号 |
 | ffmpegcom | 自定义参数 |
+|rmtime| 保留参数，暂无作用 |
 
 配置序号表
 |  配置序号   | 内容  | 备注 |

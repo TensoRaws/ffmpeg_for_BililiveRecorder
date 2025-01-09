@@ -1,4 +1,5 @@
 ffmpegcom = ''
 ffmpegtype = 10
 outputdir = ''
+rmtime = -1
 workdir = ''
