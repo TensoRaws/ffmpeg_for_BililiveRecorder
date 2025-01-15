@@ -46,6 +46,6 @@ func Ffmpegrun(workpath string, outpath string, types int, comms string, rmtime 
 		if err != nil {
 			logrus.Fatal("删除" + workpath + "失败")
 		}
-		logrus.Info("删除成功")
+		logrus.Info("删除" + workpath + "成功")
 	}
 }
