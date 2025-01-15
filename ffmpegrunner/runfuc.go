@@ -1,14 +1,16 @@
 package ffmpegrunner
 
 import (
+	"os"
 	"os/exec"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/sirupsen/logrus"
 )
 
-func Ffmpegrun(workpath string, outpath string, types int, comms string) {
+func Ffmpegrun(workpath string, outpath string, types int, comms string, rmtime int) {
 	logrus.Info("开始处理" + workpath)
 	//执行逻辑
 	//自定义配置
@@ -38,4 +40,12 @@ func Ffmpegrun(workpath string, outpath string, types int, comms string) {
 	}
 
 	logrus.Info("完成处理" + workpath)
+	if rmtime >= 0 {
+		time.Sleep(time.Duration(rmtime) * time.Hour)
+		err := os.Remove(workpath)
+		if err != nil {
+			logrus.Fatal("删除" + workpath + "失败")
+		}
+		logrus.Info("删除成功")
+	}
 }
